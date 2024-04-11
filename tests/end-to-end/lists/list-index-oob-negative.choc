@@ -1,0 +1,8 @@
+# RUN: choco-opt -p all -t riscv %s > %t && riscv-interpreter %t | filecheck %s
+
+a : [int] = None
+
+a = [40,41]
+print(a[-1])
+
+# CHECK: IndexError: list index out of range

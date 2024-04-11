@@ -1,0 +1,11 @@
+# RUN: choco-opt -p all -t riscv %s > %t && riscv-interpreter %t | filecheck %s
+
+i: int = 0
+l: [int] = None
+
+for i in l:
+  print(51)
+
+print(125)
+
+# CHECK: TypeError

@@ -1,0 +1,13 @@
+// RUN: choco-opt -p choco-flat-introduce-library-calls %s | filecheck %s
+
+// print(True)
+
+builtin.module() {
+  %0 : !choco.ir.named_type<"bool"> = choco.ir.literal() ["value" = !choco.ir.bool<True>]
+  choco.ir.call_expr(%0 : !choco.ir.named_type<"bool">) ["func_name" = "print"]
+}
+
+// CHECK:      module() {
+// CHECK-NEXT:   %0 : !choco.ir.named_type<"bool"> = choco.ir.literal() ["value" = !choco.ir.bool<True>]
+// CHECK-NEXT:   choco.ir.call_expr(%0 : !choco.ir.named_type<"bool">) ["func_name" = "_print_bool"]
+// CHECK-NEXT: }

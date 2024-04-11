@@ -1,0 +1,10 @@
+# RUN: choco-opt -p check-assign-target,name-analysis,type-checking,warn-dead-code %s | filecheck %s
+
+def foo():
+    return
+    print("DEAD")
+    return
+
+foo()
+
+# CHECK:      [Warning] Dead code found: Program contains unreachable statements.

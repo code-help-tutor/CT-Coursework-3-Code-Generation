@@ -1,0 +1,8 @@
+# RUN: choco-opt -p name-analysis %s | filecheck %s
+
+x: int = 0
+
+def foo():
+    x = 42
+
+# CHECK:      Semantic error: [Name Analysis Error]: Cannot assign to variable `x' that is not explicitly declared in this scope

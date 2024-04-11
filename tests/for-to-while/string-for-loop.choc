@@ -1,0 +1,36 @@
+# RUN: choco-opt -p check-assign-target,name-analysis,type-checking,warn-dead-code,choco-ast-to-choco-flat,choco-flat-introduce-library-calls,for-to-while %s | filecheck %s
+
+x: str = ""
+
+for x in "test":
+  print(x)
+
+# CHECK:      module() {
+# CHECK-NEXT:   choco.ir.func_def() ["func_name" = "_main", "return_type" = !choco.ir.named_type<"<None>">] {
+# CHECK-NEXT:     %0 : !choco.ir.named_type<"str"> = choco.ir.literal() ["value" = ""]
+# CHECK-NEXT:     %1 : !choco.ir.memloc<!choco.ir.named_type<"str">> = choco.ir.alloc() ["type" = !choco.ir.named_type<"str">]
+# CHECK-NEXT:     choco.ir.store(%1 : !choco.ir.memloc<!choco.ir.named_type<"str">>, %0 : !choco.ir.named_type<"str">)
+# CHECK-NEXT:     %2 : !choco.ir.named_type<"str"> = choco.ir.literal() ["value" = "test"]
+# CHECK-NEXT:     %3 : !choco.ir.memloc<!choco.ir.named_type<"int">> = choco.ir.alloc() ["type" = !choco.ir.named_type<"int">]
+# CHECK-NEXT:     %4 : !choco.ir.named_type<"int"> = choco.ir.literal() ["value" = 0 : !i32]
+# CHECK-NEXT:     choco.ir.store(%3 : !choco.ir.memloc<!choco.ir.named_type<"int">>, %4 : !choco.ir.named_type<"int">)
+# CHECK-NEXT:     choco.ir.while() {
+# CHECK-NEXT:       %5 : !choco.ir.named_type<"int"> = choco.ir.call_expr(%2 : !choco.ir.named_type<"str">) ["func_name" = "len"]
+# CHECK-NEXT:       %6 : !choco.ir.named_type<"int"> = choco.ir.load(%3 : !choco.ir.memloc<!choco.ir.named_type<"int">>)
+# CHECK-NEXT:       %7 : !choco.ir.named_type<"bool"> = choco.ir.binary_expr(%6 : !choco.ir.named_type<"int">, %5 : !choco.ir.named_type<"int">) ["op" = "<"]
+# CHECK-NEXT:       choco.ir.yield(%7 : !choco.ir.named_type<"bool">)
+# CHECK-NEXT:     } {
+# CHECK-NEXT:       %8 : !choco.ir.named_type<"int"> = choco.ir.load(%3 : !choco.ir.memloc<!choco.ir.named_type<"int">>)
+# CHECK-NEXT:       %9 : !choco.ir.memloc<!choco.ir.named_type<"str">> = choco.ir.get_address(%2 : !choco.ir.named_type<"str">, %8 : !choco.ir.named_type<"int">)
+# CHECK-NEXT:       %10 : !choco.ir.named_type<"str"> = choco.ir.load(%9 : !choco.ir.memloc<!choco.ir.named_type<"str">>)
+# CHECK-NEXT:       %11 : !choco.ir.named_type<"str"> = choco.ir.list_expr(%10 : !choco.ir.named_type<"str">)
+# CHECK-NEXT:       choco.ir.store(%1 : !choco.ir.memloc<!choco.ir.named_type<"str">>, %11 : !choco.ir.named_type<"str">)
+# CHECK-NEXT:       %12 : !choco.ir.named_type<"str"> = choco.ir.load(%1 : !choco.ir.memloc<!choco.ir.named_type<"str">>)
+# CHECK-NEXT:       choco.ir.call_expr(%12 : !choco.ir.named_type<"str">) ["func_name" = "_print_str"]
+# CHECK-NEXT:       %13 : !choco.ir.named_type<"int"> = choco.ir.load(%3 : !choco.ir.memloc<!choco.ir.named_type<"int">>)
+# CHECK-NEXT:       %14 : !choco.ir.named_type<"int"> = choco.ir.literal() ["value" = 1 : !i32]
+# CHECK-NEXT:       %15 : !choco.ir.named_type<"int"> = choco.ir.binary_expr(%13 : !choco.ir.named_type<"int">, %14 : !choco.ir.named_type<"int">) ["op" = "+"]
+# CHECK-NEXT:       choco.ir.store(%3 : !choco.ir.memloc<!choco.ir.named_type<"int">>, %15 : !choco.ir.named_type<"int">)
+# CHECK-NEXT:     }
+# CHECK-NEXT:   }
+# CHECK-NEXT: }

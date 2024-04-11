@@ -1,0 +1,10 @@
+# RUN: choco-opt %s | filecheck %s
+
+def foo():
+    if True:
+        stmt1
+         stmt2
+
+# CHECK:      SyntaxError (line 6, column 9): Unexpected indentation.
+# CHECK-NEXT: >>>         stmt2
+# CHECK-NEXT: >>>--------^

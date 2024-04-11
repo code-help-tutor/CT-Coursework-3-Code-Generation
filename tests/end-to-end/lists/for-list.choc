@@ -1,0 +1,13 @@
+# RUN: choco-opt -p all -t riscv %s > %t && riscv-interpreter %t | filecheck %s
+# RUN: python3 %s | filecheck %s
+
+i: int = 0
+l: [int] = None
+l = [25, 56, 126]
+
+for i in l:
+  print(i)
+
+# CHECK: 25
+# CHECK: 56
+# CHECK: 126

@@ -1,0 +1,13 @@
+# RUN: choco-opt %s | filecheck %s
+
+"Hello"
+"He\"ll\"o"
+"He\nllo"
+"He\\\"llo"
+
+# CHECK:      choco.ast.program() {} {
+# CHECK-NEXT:   choco.ast.literal() ["value" = "Hello"]
+# CHECK-NEXT:   choco.ast.literal() ["value" = "He\"ll\"o"]
+# CHECK-NEXT:   choco.ast.literal() ["value" = "He\nllo"]
+# CHECK-NEXT:   choco.ast.literal() ["value" = "He\\\"llo"]
+# CHECK-NEXT: }

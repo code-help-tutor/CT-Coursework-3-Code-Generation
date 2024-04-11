@@ -1,0 +1,26 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel"
+]
+
+[tool.pyright]
+include = ["choco", "riscv"]
+reportImportCycles = false
+reportUnnecessaryIsInstance = false
+
+[project]
+name = "ChocoPyCompiler"
+version = "0.0.1"
+
+[tool.setuptools.package-dir]
+"choco" = "choco"
+"riscv" = "riscv"
+"tools" = "tools"
+"util" = "util"
+
+[project.scripts]
+choco-opt = "tools.choco_opt:__main__"
+choco-lexer = "tools.choco_lexer:__main__"
+riscv-interpreter = "tools.riscv_interpreter:__main__"
+riscv-lexer = "tools.riscv_lexer:__main__"

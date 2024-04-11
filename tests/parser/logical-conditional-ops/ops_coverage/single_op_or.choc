@@ -1,0 +1,11 @@
+# RUN: choco-opt %s | filecheck %s
+
+a or b
+
+# CHECK:      choco.ast.program() {} {
+# CHECK-NEXT:   choco.ast.binary_expr() ["op" = "or"] {
+# CHECK-NEXT:     choco.ast.id_expr() ["id" = "a"]
+# CHECK-NEXT:   } {
+# CHECK-NEXT:     choco.ast.id_expr() ["id" = "b"]
+# CHECK-NEXT:   }
+# CHECK-NEXT: }

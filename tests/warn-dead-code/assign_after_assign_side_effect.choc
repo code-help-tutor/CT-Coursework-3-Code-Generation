@@ -1,0 +1,19 @@
+# RUN: choco-opt -p check-assign-target,name-analysis,type-checking,warn-dead-code %s | filecheck %s
+
+def foo(y: int) -> int:
+    print("Side effect!")
+    return y
+
+x: int = 0
+x = foo(5)
+x = foo(6)
+print(x)
+
+# CHECK:      [Warning] Dead code found: The following store operation is unused: 
+# CHECK-NEXT: choco.ast.assign() {
+# CHECK-NEXT:   choco.ast.id_expr() ["id" = "x", "type_hint" = !choco.ir.named_type<"int">]
+# CHECK-NEXT: } {
+# CHECK-NEXT:   choco.ast.call_expr() ["func" = "foo", "type_hint" = !choco.ir.named_type<"int">] {
+# CHECK-NEXT:     choco.ast.literal() ["value" = 5 : !i32, "type_hint" = !choco.ir.named_type<"int">]
+# CHECK-NEXT:   }
+# CHECK-NEXT: }

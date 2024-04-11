@@ -1,0 +1,9 @@
+# RUN: choco-opt -p all -t riscv %s > %t && riscv-interpreter %t | filecheck %s
+# RUN: python3 %s | filecheck %s
+
+a : [int] = None
+
+a = [40,41,42]
+print(len(a))
+
+# CHECK: 3

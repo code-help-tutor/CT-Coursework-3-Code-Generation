@@ -1,0 +1,10 @@
+# RUN: choco-opt %s | filecheck %s
+
+def foo():
+    a : int = 0
+    a = 1
+    b : int = 1
+
+# CHECK:      SyntaxError (line 6, column 7): Variable declaration after non-declaration statement.
+# CHECK-NEXT: >>>    b : int = 1
+# CHECK-NEXT: >>>------^

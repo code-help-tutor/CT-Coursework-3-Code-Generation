@@ -1,0 +1,11 @@
+# RUN: choco-opt -p all -t riscv %s > %t && riscv-interpreter %t | filecheck %s
+# RUN: python3 %s | filecheck %s
+
+def foo() -> int:
+  x: int = 0
+  x = 42
+  return x
+
+print(foo())
+
+# CHECK:      42

@@ -1,0 +1,34 @@
+# RUN: choco-opt -p name-analysis %s | filecheck %s
+
+x: int = 0
+def foo():
+    y: int = 0
+    y = x
+
+# CHECK:      builtin.module() {
+# CHECK-NEXT:   choco.ast.program() {
+# CHECK-NEXT:     choco.ast.var_def() {
+# CHECK-NEXT:       choco.ast.typed_var() ["var_name" = "x"] {
+# CHECK-NEXT:         choco.ast.type_name() ["type_name" = "int"]
+# CHECK-NEXT:       }
+# CHECK-NEXT:     } {
+# CHECK-NEXT:       choco.ast.literal() ["value" = 0 : !i32]
+# CHECK-NEXT:     }
+# CHECK-NEXT:     choco.ast.func_def() ["func_name" = "foo"] {} {
+# CHECK-NEXT:       choco.ast.type_name() ["type_name" = "<None>"]
+# CHECK-NEXT:     } {
+# CHECK-NEXT:       choco.ast.var_def() {
+# CHECK-NEXT:         choco.ast.typed_var() ["var_name" = "y"] {
+# CHECK-NEXT:           choco.ast.type_name() ["type_name" = "int"]
+# CHECK-NEXT:         }
+# CHECK-NEXT:       } {
+# CHECK-NEXT:         choco.ast.literal() ["value" = 0 : !i32]
+# CHECK-NEXT:       }
+# CHECK-NEXT:       choco.ast.assign() {
+# CHECK-NEXT:         choco.ast.id_expr() ["id" = "y"]
+# CHECK-NEXT:       } {
+# CHECK-NEXT:         choco.ast.id_expr() ["id" = "x"]
+# CHECK-NEXT:       }
+# CHECK-NEXT:     }
+# CHECK-NEXT:   } {}
+# CHECK-NEXT: }

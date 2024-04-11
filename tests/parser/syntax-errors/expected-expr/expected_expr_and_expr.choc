@@ -1,0 +1,7 @@
+# RUN: choco-opt %s | filecheck %s
+
+True and
+
+# CHECK:      SyntaxError (line 3, column 9): Expected expression.
+# CHECK-NEXT: >>>True and
+# CHECK-NEXT: >>>--------^

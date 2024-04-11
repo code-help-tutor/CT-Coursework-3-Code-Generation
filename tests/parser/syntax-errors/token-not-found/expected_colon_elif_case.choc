@@ -1,0 +1,12 @@
+# RUN: choco-opt %s | filecheck %s
+
+def foo():
+    if True:
+        pass
+    elif False
+        1
+
+
+# CHECK:      SyntaxError (line 6, column 15): token of kind TokenKind.COLON not found.
+# CHECK-NEXT: >>>    elif False
+# CHECK-NEXT: >>>--------------^

@@ -1,0 +1,14 @@
+# RUN: choco-opt %s | filecheck %s
+
+[foo(1)]
+
+# CHECK:      module() {
+# CHECK-NEXT:   choco.ast.program() {} {
+# CHECK-NEXT:     choco.ast.list_expr() {
+# CHECK-NEXT:       choco.ast.call_expr() ["func" = "foo"] {
+# CHECK-NEXT:         choco.ast.literal() ["value" = 1 : !i32]
+# CHECK-NEXT:       }
+# CHECK-NEXT:     }
+# CHECK-NEXT:   }
+# CHECK-NEXT: }
+# CHECK-NEXT: 

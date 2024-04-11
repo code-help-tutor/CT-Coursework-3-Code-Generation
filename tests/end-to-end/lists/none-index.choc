@@ -1,0 +1,7 @@
+# RUN: choco-opt -p all -t riscv %s > %t && riscv-interpreter %t | filecheck %s
+
+l: [int] = None
+
+print(l[0])
+
+# CHECK: TypeError: 'NoneType' object is not subscriptable

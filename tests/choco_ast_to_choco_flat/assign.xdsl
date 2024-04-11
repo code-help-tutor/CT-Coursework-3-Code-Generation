@@ -1,0 +1,15 @@
+// RUN: choco-opt -p "choco-ast-to-choco-flat" %s | filecheck %s
+
+builtin.module() {
+  choco.ast.program() {
+    choco.ast.var_def() {
+      choco.ast.typed_var() ["var_name" = "x"] {
+        choco.ast.type_name() ["type_name" = "int"]
+      }
+    } {
+      choco.ast.literal() ["value" = 0 : !i32]
+    }
+  } {}
+}
+
+// CHECK:      

@@ -1,0 +1,11 @@
+# RUN: choco-opt %s | filecheck %s
+
+[[]]
+
+# CHECK:      builtin.module() {
+# CHECK-NEXT:   choco.ast.program() {} {
+# CHECK-NEXT:     choco.ast.list_expr() {
+# CHECK-NEXT:       choco.ast.list_expr() {}
+# CHECK-NEXT:     }
+# CHECK-NEXT:   }
+# CHECK-NEXT: }

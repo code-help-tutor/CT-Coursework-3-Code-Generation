@@ -1,0 +1,7 @@
+# RUN: choco-opt %s | filecheck %s
+
+= 1
+
+# CHECK:      SyntaxError (line 3, column 1): No left-hand side in assign statement.
+# CHECK-NEXT: >>>= 1
+# CHECK-NEXT: >>>^

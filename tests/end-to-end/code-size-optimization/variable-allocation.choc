@@ -1,0 +1,53 @@
+# RUN: choco-opt -p all -t riscv %s > %t && echo "41" | riscv-interpreter %t | filecheck %s
+# RUN: echo "41" | python3 %s | filecheck %s
+
+def char_to_int(c: str) -> int:
+  if c == "1":
+    return 1
+  if c == "2":
+    return 2
+  if c == "3":
+    return 3
+  if c == "4":
+    return 4
+  if c == "5":
+    return 5
+  if c == "6":
+    return 6
+  if c == "7":
+    return 7
+  if c == "8":
+    return 8
+  if c == "9":
+    return 9
+  return 0
+
+def str_to_int(s: str) -> int:
+  char: str = ""
+  res: int = 0
+  for char in s:
+    res = res * 10
+    res = res + char_to_int(char)
+  return res
+
+temp0: int = 0
+temp1: int = 0
+temp2: int = 0
+temp3: int = 0
+temp4: int = 0
+temp5: int = 0
+temp6: int = 0
+res: int = 0
+
+temp0 = str_to_int(input())
+temp1 = temp0 + 4
+temp2 = temp1 * 5
+temp3 = temp2 // 2
+temp4 = temp3 % 7
+temp5 = temp4 * 2
+temp6 = temp5 - 2
+res = temp6 * 15
+
+print(res)
+
+# CHECK: -30

@@ -1,0 +1,13 @@
+# RUN: choco-opt -p all -t riscv %s > %t && riscv-interpreter %t | filecheck %s
+# RUN: python3 %s | filecheck %s
+
+x: int = 0
+
+def foo():
+  global x
+  x = 12
+
+foo() if True else False
+print(x)
+
+# CHECK:      12

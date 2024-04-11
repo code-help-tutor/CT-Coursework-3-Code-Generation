@@ -1,0 +1,10 @@
+# RUN: choco-opt %s | filecheck %s --strict-whitespace
+
+def foo():
+    pass
+
+[3,4
+
+# CHECK:      SyntaxError (line 6, column 5): token of kind TokenKind.RSQUAREBRACKET not found.
+# CHECK-NEXT: >>>[3,4
+# CHECK-NEXT: >>>----^

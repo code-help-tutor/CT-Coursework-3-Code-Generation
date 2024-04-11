@@ -1,0 +1,15 @@
+# RUN: choco-opt %s | filecheck %s
+
+while True:
+    1
+
+# CHECK:      module() {
+# CHECK-NEXT:   choco.ast.program() {} {
+# CHECK-NEXT:     choco.ast.while() {
+# CHECK-NEXT:       choco.ast.literal() ["value" = !choco.ast.bool<True>]
+# CHECK-NEXT:     } {
+# CHECK-NEXT:       choco.ast.literal() ["value" = 1 : !i32]
+# CHECK-NEXT:     }
+# CHECK-NEXT:   }
+# CHECK-NEXT: }
+# CHECK-NEXT: 

@@ -1,0 +1,8 @@
+# RUN: choco-opt %s | filecheck %s --strict-whitespace
+
+def foo(:
+    pass
+
+# CHECK:      SyntaxError (line 3, column 9): token of kind TokenKind.RROUNDBRACKET not found.
+# CHECK-NEXT: >>>def foo(:
+# CHECK-NEXT: >>>--------^

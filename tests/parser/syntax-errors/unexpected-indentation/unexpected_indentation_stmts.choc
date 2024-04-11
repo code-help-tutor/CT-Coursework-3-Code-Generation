@@ -1,0 +1,8 @@
+# RUN: choco-opt %s | filecheck %s
+
+a = 0
+ a += 1
+
+# CHECK:      SyntaxError (line 4, column 1): Unexpected indentation.
+# CHECK-NEXT: >>> a += 1
+# CHECK-NEXT: >>>^

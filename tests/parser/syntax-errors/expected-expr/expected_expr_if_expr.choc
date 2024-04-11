@@ -1,0 +1,7 @@
+# RUN: choco-opt %s | filecheck %s
+
+1 if else 0
+
+# CHECK:      SyntaxError (line 3, column 6): Expected expression.
+# CHECK-NEXT: >>>1 if else 0
+# CHECK-NEXT: >>>-----^

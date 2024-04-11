@@ -1,0 +1,14 @@
+# RUN: choco-opt -p all -t riscv %s > %t && riscv-interpreter %t | filecheck %s
+# RUN: python3 %s | filecheck %s
+
+print(52 if True else 12)
+print(52 if False else 12)
+
+print(True if True else False)
+print(True if False else False)
+
+
+# CHECK:      52
+# CHECK:      12
+# CHECK:      True
+# CHECK:      False

@@ -1,0 +1,15 @@
+# RUN: choco-opt -p all -t riscv %s > %t && riscv-interpreter %t | filecheck %s
+# RUN: python3 %s | filecheck %s
+
+# The order of execution of the assignments is important here.
+
+a: [int] = None
+b: int = 2
+a = [3, 1, 0]
+b = a[b + 1] = a[b]
+for b in a:
+    print(b)
+
+# CHECK: 3
+# CHECK-NEXT: 0
+# CHECK-NEXT: 0

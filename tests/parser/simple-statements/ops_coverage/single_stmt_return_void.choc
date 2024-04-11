@@ -1,0 +1,12 @@
+# RUN: choco-opt %s | filecheck %s
+
+def foo():
+    return
+
+# CHECK:      choco.ast.program() {
+# CHECK-NEXT:   choco.ast.func_def() ["func_name" = "foo"] {} {
+# CHECK-NEXT:     choco.ast.type_name() ["type_name" = "<None>"]
+# CHECK-NEXT:   } {
+# CHECK-NEXT:     choco.ast.return() {}
+# CHECK-NEXT:   }
+# CHECK-NEXT: } {}

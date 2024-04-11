@@ -1,0 +1,7 @@
+# RUN: choco-opt %s | filecheck %s --strict-whitespace
+
+foo(5
+
+# CHECK:      SyntaxError (line 3, column 6): token of kind TokenKind.RROUNDBRACKET not found.
+# CHECK-NEXT: >>>foo(5
+# CHECK-NEXT: >>>-----^

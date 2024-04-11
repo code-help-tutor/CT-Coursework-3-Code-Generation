@@ -1,0 +1,7 @@
+# RUN: choco-opt %s | filecheck %s
+
+foo(1 2)
+
+# CHECK:      SyntaxError (line 3, column 7): expression found, but comma expected.
+# CHECK-NEXT: >>>foo(1 2)
+# CHECK-NEXT: >>>------^

@@ -1,0 +1,25 @@
+# RUN: choco-opt -p all -t riscv %s > %t && riscv-interpreter %t | filecheck %s
+# RUN: python3 %s | filecheck %s
+
+a : [int] = None
+b : [int] = None
+c : [int] = None
+
+a = [1,2,3]
+b = [4,5]
+
+c = a + b
+
+print(len(c))
+print(c[0])
+print(c[1])
+print(c[2])
+print(c[3])
+print(c[4])
+
+# CHECK: 5
+# CHECK-NEXT: 1
+# CHECK-NEXT: 2
+# CHECK-NEXT: 3
+# CHECK-NEXT: 4
+# CHECK-NEXT: 5

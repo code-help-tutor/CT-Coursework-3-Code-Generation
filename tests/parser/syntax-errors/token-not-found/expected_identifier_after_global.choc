@@ -1,0 +1,9 @@
+# RUN: choco-opt %s | filecheck %s
+
+def foo():
+    global 3
+
+
+# CHECK:      SyntaxError (line 4, column 12): token of kind TokenKind.IDENTIFIER not found.
+# CHECK-NEXT: >>>    global 3
+# CHECK-NEXT: >>>-----------^

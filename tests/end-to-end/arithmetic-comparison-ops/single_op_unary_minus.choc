@@ -1,0 +1,15 @@
+# RUN: choco-opt -p all -t riscv %s > %t && riscv-interpreter %t | filecheck %s
+# RUN: python3 %s | filecheck %s
+
+
+print(-0)
+print(-1)
+print(--1)
+print(---1)
+print(-2147483647)
+
+# CHECK:      0
+# CHECK-NEXT: -1
+# CHECK-NEXT:  1
+# CHECK-NEXT: -1
+# CHECK-NEXT: -2147483647

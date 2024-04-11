@@ -1,0 +1,7 @@
+# RUN: choco-opt %s | filecheck %s
+
+i : int = 0 j : int = 0
+
+# CHECK:      SyntaxError (line 3, column 13): token of kind TokenKind.NEWLINE not found.
+# CHECK-NEXT: >>>i : int = 0 j : int = 0
+# CHECK-NEXT: >>>------------^

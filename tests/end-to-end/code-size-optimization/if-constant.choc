@@ -1,0 +1,9 @@
+# RUN: choco-opt -p all -t riscv %s > %t && riscv-interpreter %t | filecheck %s
+# RUN: python3 %s | filecheck %s
+
+if True:
+  print(142)
+else:
+  print(510)
+
+# CHECK: 142

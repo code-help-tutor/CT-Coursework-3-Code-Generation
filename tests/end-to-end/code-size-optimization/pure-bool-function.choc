@@ -1,0 +1,13 @@
+# RUN: choco-opt -p all -t riscv %s > %t && riscv-interpreter %t | filecheck %s
+# RUN: python3 %s | filecheck %s
+
+b: bool = True
+c: bool = False
+
+b = True and b
+c = b and (not c) or b
+c = (b == c) or (b != c) if not b else c
+
+print(c)
+
+# CHECK: True

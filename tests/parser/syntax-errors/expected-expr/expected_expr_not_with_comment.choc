@@ -1,0 +1,10 @@
+# RUN: choco-opt %s | filecheck %s
+
+# A mini comment to ensure that comments do not break linenumber
+# counting.
+
+not
+
+# CHECK:      SyntaxError (line 6, column 4): Expected expression.
+# CHECK-NEXT: >>>not
+# CHECK-NEXT: >>>---^

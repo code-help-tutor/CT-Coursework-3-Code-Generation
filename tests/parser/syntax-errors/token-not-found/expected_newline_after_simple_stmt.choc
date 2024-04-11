@@ -1,0 +1,9 @@
+# RUN: choco-opt %s | filecheck %s --strict-whitespace
+
+def foo():
+    if True:
+        pass pass
+
+# CHECK:      SyntaxError (line 5, column 14): token of kind TokenKind.NEWLINE not found.
+# CHECK-NEXT: >>>        pass pass
+# CHECK-NEXT: >>>-------------^

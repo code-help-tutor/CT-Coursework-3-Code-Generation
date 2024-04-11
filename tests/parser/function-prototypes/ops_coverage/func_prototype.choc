@@ -1,0 +1,20 @@
+# RUN: choco-opt %s | filecheck %s
+
+def contains(items: [int]) -> bool:
+    1
+
+# CHECK:      builtin.module() {
+# CHECK-NEXT:   choco.ast.program() {
+# CHECK-NEXT:     choco.ast.func_def() ["func_name" = "contains"] {
+# CHECK-NEXT:       choco.ast.typed_var() ["var_name" = "items"] {
+# CHECK-NEXT:         choco.ast.list_type() {
+# CHECK-NEXT:           choco.ast.type_name() ["type_name" = "int"]
+# CHECK-NEXT:         }
+# CHECK-NEXT:       }
+# CHECK-NEXT:     } {
+# CHECK-NEXT:       choco.ast.type_name() ["type_name" = "bool"]
+# CHECK-NEXT:     } {
+# CHECK-NEXT:       choco.ast.literal() ["value" = 1 : !i32]
+# CHECK-NEXT:     }
+# CHECK-NEXT:   } {}
+# CHECK-NEXT: }

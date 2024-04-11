@@ -1,0 +1,7 @@
+# RUN: choco-opt -p all -t riscv %s > %t && riscv-interpreter %t
+
+a : [int] = None
+
+print(len(a))
+
+# CHECK: TypeError: object of type 'NoneType' has no len()

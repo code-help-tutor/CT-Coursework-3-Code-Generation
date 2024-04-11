@@ -1,0 +1,13 @@
+// RUN: choco-opt -p check-assign-target,name-analysis,type-checking %s | filecheck %s
+
+// 
+// 
+
+
+builtin.module() {
+  choco.ast.program() {} {}
+}
+
+// CHECK:      builtin.module() {
+// CHECK-NEXT:   choco.ast.program() {} {}
+// CHECK-NEXT: }

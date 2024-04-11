@@ -1,0 +1,26 @@
+// RUN: choco-opt -p check-assign-target,name-analysis,type-checking %s | filecheck %s
+
+// 
+// o: object = None
+// o == o
+// 
+
+
+builtin.module() {
+  choco.ast.program() {
+    choco.ast.var_def() {
+      choco.ast.typed_var() ["var_name" = "o"] {
+        choco.ast.type_name() ["type_name" = "object"]
+      }
+    } {
+      choco.ast.literal() ["value" = !choco.ast.none]
+    }
+  } {
+    choco.ast.binary_expr() ["op" = "=="] {
+      choco.ast.id_expr() ["id" = "o"]
+    } {
+      choco.ast.id_expr() ["id" = "o"]
+    }
+  }
+}
+// CHECK: Semantic error:

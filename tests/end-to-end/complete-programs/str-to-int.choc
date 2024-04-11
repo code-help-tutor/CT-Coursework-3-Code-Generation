@@ -1,0 +1,39 @@
+# RUN: choco-opt -p all -t riscv %s > %t && echo "2022" | riscv-interpreter %t | filecheck %s
+# RUN: echo "2022" | python3 %s | filecheck %s
+
+def char_to_int(c: str) -> int:
+  if c == "1":
+    return 1
+  if c == "2":
+    return 2
+  if c == "3":
+    return 3
+  if c == "4":
+    return 4
+  if c == "5":
+    return 5
+  if c == "6":
+    return 6
+  if c == "7":
+    return 7
+  if c == "8":
+    return 8
+  if c == "9":
+    return 9
+  return 0
+
+def str_to_int(s: str) -> int:
+  char: str = ""
+  res: int = 0
+  for char in s:
+    res = res * 10
+    res = res + char_to_int(char)
+  return res
+
+var : str = ""
+
+var = input()
+print(str_to_int(var))
+
+
+# CHECK: 2022

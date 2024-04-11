@@ -1,0 +1,7 @@
+# RUN: choco-opt %s | filecheck %s
+
+1 and 2 < 3 == 3
+
+# CHECK:      SyntaxError (line 3, column 13): Comparison operators are not associative.
+# CHECK-NEXT: >>>1 and 2 < 3 == 3
+# CHECK-NEXT: >>>------------^

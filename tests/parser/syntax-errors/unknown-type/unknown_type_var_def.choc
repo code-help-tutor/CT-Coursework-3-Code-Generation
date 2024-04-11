@@ -1,0 +1,7 @@
+# RUN: choco-opt %s | filecheck %s --strict-whitespace
+
+a : random = 0
+
+# CHECK:      SyntaxError (line 3, column 5): Unknown type.
+# CHECK-NEXT: >>>a : random = 0
+# CHECK-NEXT: >>>----^

@@ -1,0 +1,18 @@
+# RUN: choco-opt %s | filecheck %s
+
+i: [str] = 0
+
+# CHECK:      module() {
+# CHECK-NEXT:   choco.ast.program() {
+# CHECK-NEXT:     choco.ast.var_def() {
+# CHECK-NEXT:       choco.ast.typed_var() ["var_name" = "i"] {
+# CHECK-NEXT:         choco.ast.list_type() {
+# CHECK-NEXT:           choco.ast.type_name() ["type_name" = "str"]
+# CHECK-NEXT:         }
+# CHECK-NEXT:       }
+# CHECK-NEXT:     } {
+# CHECK-NEXT:       choco.ast.literal() ["value" = 0 : !i32]
+# CHECK-NEXT:     }
+# CHECK-NEXT:   } {}
+# CHECK-NEXT: }
+# CHECK-NEXT: 

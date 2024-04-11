@@ -1,0 +1,241 @@
+# RUN: choco-opt -p all -t riscv %s > %t && echo "41" | riscv-interpreter %t | filecheck %s
+# RUN: echo "41" | python3 %s | filecheck %s
+
+def char_to_int(c: str) -> int:
+  if c == "1":
+    return 1
+  if c == "2":
+    return 2
+  if c == "3":
+    return 3
+  if c == "4":
+    return 4
+  if c == "5":
+    return 5
+  if c == "6":
+    return 6
+  if c == "7":
+    return 7
+  if c == "8":
+    return 8
+  if c == "9":
+    return 9
+  return 0
+
+def str_to_int(s: str) -> int:
+  char: str = ""
+  res: int = 0
+  for char in s:
+    res = res * 10
+    res = res + char_to_int(char)
+  return res
+
+temp0: int = 0
+temp1: int = 0
+temp2: int = 0
+temp3: int = 0
+temp4: int = 0
+temp5: int = 0
+temp6: int = 0
+temp7: int = 0
+temp8: int = 0
+temp9: int = 0
+temp10: int = 0
+temp11: int = 0
+temp12: int = 0
+temp13: int = 0
+temp14: int = 0
+temp15: int = 0
+temp16: int = 0
+temp17: int = 0
+temp18: int = 0
+temp19: int = 0
+temp20: int = 0
+temp21: int = 0
+temp22: int = 0
+temp23: int = 0
+temp24: int = 0
+temp25: int = 0
+temp26: int = 0
+temp27: int = 0
+temp28: int = 0
+temp29: int = 0
+temp30: int = 0
+temp31: int = 0
+temp32: int = 0
+temp33: int = 0
+temp34: int = 0
+temp35: int = 0
+temp36: int = 0
+temp37: int = 0
+temp38: int = 0
+temp39: int = 0
+temp40: int = 0
+temp41: int = 0
+temp42: int = 0
+temp43: int = 0
+temp44: int = 0
+temp45: int = 0
+temp46: int = 0
+temp47: int = 0
+temp48: int = 0
+temp49: int = 0
+temp50: int = 0
+temp51: int = 0
+temp52: int = 0
+temp53: int = 0
+temp54: int = 0
+temp55: int = 0
+temp56: int = 0
+temp57: int = 0
+temp58: int = 0
+temp59: int = 0
+temp60: int = 0
+temp61: int = 0
+temp62: int = 0
+temp63: int = 0
+temp64: int = 0
+temp65: int = 0
+temp66: int = 0
+temp67: int = 0
+temp68: int = 0
+temp69: int = 0
+temp70: int = 0
+temp71: int = 0
+temp72: int = 0
+temp73: int = 0
+temp74: int = 0
+temp75: int = 0
+temp76: int = 0
+temp77: int = 0
+temp78: int = 0
+temp79: int = 0
+temp80: int = 0
+temp81: int = 0
+temp82: int = 0
+temp83: int = 0
+temp84: int = 0
+temp85: int = 0
+temp86: int = 0
+temp87: int = 0
+temp88: int = 0
+temp89: int = 0
+temp90: int = 0
+temp91: int = 0
+temp92: int = 0
+temp93: int = 0
+temp94: int = 0
+temp95: int = 0
+temp96: int = 0
+temp97: int = 0
+temp98: int = 0
+temp99: int = 0
+temp100: int = 0
+
+res: int = 0
+
+temp0 = str_to_int(input())
+temp1 = temp0 + 4
+temp2 = temp1 * 5
+temp3 = temp2 // 2
+temp4 = temp3 % 7
+temp5 = temp4 * 2
+temp6 = temp5 - 2
+temp7 = temp6 * 2
+temp8 = temp7 + 3
+temp9 = temp8 // 4
+temp10 = temp9 % 435
+temp11 = temp10 + 4
+temp12 = temp11 * 5
+temp13 = temp12 // 2
+temp14 = temp13 % 7
+temp15 = temp14 * 2
+temp16 = temp15 - 2
+temp17 = temp16 * 2
+temp18 = temp17 + 3
+temp19 = temp18 // 4
+temp20 = temp19 % 435
+temp21 = temp20 + 4
+temp22 = temp21 * 5
+temp23 = temp22 // 2
+temp24 = temp23 % 7
+temp25 = temp24 * 2
+temp26 = temp25 - 2
+temp27 = temp26 * 2
+temp28 = temp27 + 3
+temp29 = temp28 // 4
+temp30 = temp29 % 435
+temp31 = temp30 + 4
+temp32 = temp31 * 5
+temp33 = temp32 // 2
+temp34 = temp33 % 7
+temp35 = temp34 * 2
+temp36 = temp35 - 2
+temp37 = temp36 * 2
+temp38 = temp37 + 3
+temp39 = temp38 // 4
+temp40 = temp39 % 435
+temp41 = temp40 + 4
+temp42 = temp41 * 5
+temp43 = temp42 // 2
+temp44 = temp43 % 7
+temp45 = temp44 * 2
+temp46 = temp45 - 2
+temp47 = temp46 * 2
+temp48 = temp47 + 3
+temp49 = temp48 // 4
+temp50 = temp49 % 435
+temp51 = temp50 + 4
+temp52 = temp51 * 5
+temp53 = temp52 // 2
+temp54 = temp53 % 7
+temp55 = temp54 * 2
+temp56 = temp55 - 2
+temp57 = temp56 * 2
+temp58 = temp57 + 3
+temp59 = temp58 // 4
+temp60 = temp59 % 435
+temp61 = temp60 + 4
+temp62 = temp61 * 5
+temp63 = temp62 // 2
+temp64 = temp63 % 7
+temp65 = temp64 * 2
+temp66 = temp65 - 2
+temp67 = temp66 * 2
+temp68 = temp67 + 3
+temp69 = temp68 // 4
+temp70 = temp69 % 435
+temp71 = temp70 + 4
+temp72 = temp71 * 5
+temp73 = temp72 // 2
+temp74 = temp73 % 7
+temp75 = temp74 * 2
+temp76 = temp75 - 2
+temp77 = temp76 * 2
+temp78 = temp77 + 3
+temp79 = temp78 // 4
+temp80 = temp79 % 435
+temp81 = temp80 + 4
+temp82 = temp81 * 5
+temp83 = temp82 // 2
+temp84 = temp83 % 7
+temp85 = temp84 * 2
+temp86 = temp85 - 2
+temp87 = temp86 * 2
+temp88 = temp87 + 3
+temp89 = temp88 // 4
+temp90 = temp89 % 435
+temp91 = temp90 + 4
+temp92 = temp91 * 5
+temp93 = temp92 // 2
+temp94 = temp93 % 7
+temp95 = temp94 * 2
+temp96 = temp95 - 2
+temp97 = temp96 * 2
+temp98 = temp97 + 3
+temp99 = temp98 // 4
+temp100 = temp99 % 42
+
+print(temp100)
+
+# CHECK: 2

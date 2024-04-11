@@ -1,0 +1,8 @@
+# RUN: choco-opt %s | filecheck %s --strict-whitespace
+
+def foo(a : random):
+    pass
+
+# CHECK:      SyntaxError (line 3, column 13): Unknown type.
+# CHECK-NEXT: >>>def foo(a : random)
+# CHECK-NEXT: >>>------------^

@@ -1,0 +1,7 @@
+# RUN: choco-opt %s | filecheck %s
+
+x if True y
+
+# CHECK:      SyntaxError (line 3, column 11): token of kind TokenKind.ELSE not found.
+# CHECK-NEXT: >>>x if True y
+# CHECK-NEXT: >>>----------^

@@ -1,0 +1,8 @@
+# RUN: choco-opt %s | filecheck %s
+
+for i in [1,2]
+    pass
+
+# CHECK:      SyntaxError (line 3, column 15): token of kind TokenKind.COLON not found.
+# CHECK-NEXT: >>>for i in [1,2]
+# CHECK-NEXT: >>>--------------^

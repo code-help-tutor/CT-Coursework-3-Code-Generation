@@ -1,0 +1,9 @@
+# RUN: choco-opt %s | filecheck %s
+
+def foo():
+  a : int = 0
+   a += 1
+
+# CHECK:      SyntaxError (line 5, column 3): Unexpected indentation.
+# CHECK-NEXT: >>>   a += 1
+# CHECK-NEXT: >>>--^

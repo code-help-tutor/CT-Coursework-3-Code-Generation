@@ -1,0 +1,9 @@
+# RUN: choco-opt %s | filecheck %s
+
+not 1
+
+# CHECK:      choco.ast.program() {} {
+# CHECK-NEXT:   choco.ast.unary_expr() ["op" = "not"] {
+# CHECK-NEXT:     choco.ast.literal() ["value" = 1 : !i32]
+# CHECK-NEXT:   }
+# CHECK-NEXT: }

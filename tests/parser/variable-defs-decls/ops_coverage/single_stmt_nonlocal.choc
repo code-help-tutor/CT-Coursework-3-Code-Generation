@@ -1,0 +1,17 @@
+# RUN: choco-opt %s | filecheck %s
+
+def foo():
+    nonlocal y
+    pass
+
+# CHECK:      module() {
+# CHECK-NEXT:   choco.ast.program() {
+# CHECK-NEXT:     choco.ast.func_def() ["func_name" = "foo"] {} {
+# CHECK-NEXT:       choco.ast.type_name() ["type_name" = "<None>"]
+# CHECK-NEXT:     } {
+# CHECK-NEXT:       choco.ast.nonlocal_decl() ["decl_name" = "y"]
+# CHECK-NEXT:       choco.ast.pass()
+# CHECK-NEXT:     }
+# CHECK-NEXT:   } {}
+# CHECK-NEXT: }
+# CHECK-NEXT: 

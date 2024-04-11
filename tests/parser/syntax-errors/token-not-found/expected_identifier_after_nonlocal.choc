@@ -1,0 +1,9 @@
+# RUN: choco-opt %s | filecheck %s
+
+def foo():
+    nonlocal 3
+
+
+# CHECK:      SyntaxError (line 4, column 14): token of kind TokenKind.IDENTIFIER not found.
+# CHECK-NEXT: >>>    nonlocal 3
+# CHECK-NEXT: >>>-------------^

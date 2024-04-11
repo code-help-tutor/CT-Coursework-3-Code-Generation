@@ -1,0 +1,8 @@
+# RUN: choco-opt -p all -t riscv %s > %t && echo "Hello-World" | riscv-interpreter %t | filecheck %s
+# RUN: echo ":Hello-World:\n" | python3 %s | filecheck %s
+
+a : str = ""
+a = input()
+print(":" + a + ":")
+
+# CHECK: :Hello-World:

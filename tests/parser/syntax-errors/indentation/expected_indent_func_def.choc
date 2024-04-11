@@ -1,0 +1,8 @@
+# RUN: choco-opt %s | filecheck %s --strict-whitespace
+
+def foo():
+pass
+
+# CHECK:      SyntaxError (line 4, column 1): expected at least one indented statement in function.
+# CHECK-NEXT: >>>pass
+# CHECK-NEXT: >>>^

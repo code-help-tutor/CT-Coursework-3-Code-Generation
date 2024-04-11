@@ -1,0 +1,12 @@
+// RUN: choco-opt %s | filecheck %s
+
+builtin.module() {
+  %0 : !choco.ir.named_type<"int"> = choco.ir.call_expr() ["func_name" = "input"]
+  choco.ir.call_expr(%0 : !choco.ir.named_type<"int">) ["func_name" = "print"]
+}
+
+// CHECK:      module() {
+// CHECK-NEXT:   %0 : !choco.ir.named_type<"int"> = choco.ir.call_expr() ["func_name" = "input"]
+// CHECK-NEXT:   choco.ir.call_expr(%0 : !choco.ir.named_type<"int">) ["func_name" = "print"]
+// CHECK-NEXT: }
+

@@ -1,0 +1,7 @@
+# RUN: choco-opt %s | filecheck %s
+
+a[1][]
+
+# CHECK:      SyntaxError (line 3, column 6): Expected expression.
+# CHECK-NEXT: >>>a[1][]
+# CHECK-NEXT: >>>-----^

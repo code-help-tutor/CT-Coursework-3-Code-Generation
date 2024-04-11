@@ -1,0 +1,20 @@
+# RUN: choco-opt %s | filecheck %s
+
+def foo():
+    if True:
+        "then"
+
+# CHECK:      module() {
+# CHECK-NEXT:   choco.ast.program() {
+# CHECK-NEXT:     choco.ast.func_def() ["func_name" = "foo"] {} {
+# CHECK-NEXT:       choco.ast.type_name() ["type_name" = "<None>"]
+# CHECK-NEXT:     } {
+# CHECK-NEXT:       choco.ast.if() {
+# CHECK-NEXT:         choco.ast.literal() ["value" = !choco.ast.bool<True>]
+# CHECK-NEXT:       } {
+# CHECK-NEXT:         choco.ast.literal() ["value" = "then"]
+# CHECK-NEXT:       } {}
+# CHECK-NEXT:     }
+# CHECK-NEXT:   } {}
+# CHECK-NEXT: }
+# CHECK-NEXT: 

@@ -1,0 +1,8 @@
+# RUN: choco-opt %s | filecheck %s
+
+def foo():
+    1 < 2 == 2
+
+# CHECK:      SyntaxError (line 4, column 11): Comparison operators are not associative.
+# CHECK-NEXT: >>>    1 < 2 == 2
+# CHECK-NEXT: >>>----------^

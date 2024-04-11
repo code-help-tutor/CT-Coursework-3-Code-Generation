@@ -1,0 +1,17 @@
+# RUN: choco-opt %s | filecheck %s
+
+def foo():
+    global x
+    pass
+
+# CHECK:      module() {
+# CHECK-NEXT:   choco.ast.program() {
+# CHECK-NEXT:     choco.ast.func_def() ["func_name" = "foo"] {} {
+# CHECK-NEXT:       choco.ast.type_name() ["type_name" = "<None>"]
+# CHECK-NEXT:     } {
+# CHECK-NEXT:       choco.ast.global_decl() ["decl_name" = "x"]
+# CHECK-NEXT:       choco.ast.pass()
+# CHECK-NEXT:     }
+# CHECK-NEXT:   } {}
+# CHECK-NEXT: }
+# CHECK-NEXT: 

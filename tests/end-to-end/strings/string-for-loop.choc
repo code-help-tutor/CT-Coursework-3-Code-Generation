@@ -1,0 +1,12 @@
+# RUN: choco-opt -p all -t riscv %s > %t && riscv-interpreter %t | filecheck %s
+# RUN: python3 %s | filecheck %s
+
+x: str = ""
+
+for x in "test":
+  print("+" + x)
+
+# CHECK:      +t
+# CHECK-NEXT: +e
+# CHECK-NEXT: +s
+# CHECK-NEXT: +t

@@ -1,0 +1,41 @@
+// RUN: choco-opt %s | filecheck %s
+
+// This test checks if the verifiers work as expected 
+
+builtin.module() {
+    %0 : !choco.ir.memloc<!choco.ir.named_type<"int">> = choco.ir.alloc() ["type" = !choco.ir.named_type<"int">]
+
+    %1 : !choco.ir.named_type<"int"> = choco.ir.literal() ["value" = !int<0>]
+    choco.ir.store(%0 : !choco.ir.memloc<!choco.ir.named_type<"int">>, %1 : !choco.ir.named_type<"int">)
+    %2 : !choco.ir.named_type<"int"> = choco.ir.load(%0 : !choco.ir.memloc<!choco.ir.named_type<"int">>)
+
+    %3 : !choco.ir.memloc<!choco.ir.list_type<!choco.ir.named_type<"int">>> = choco.ir.alloc() ["type" = !choco.ir.list_type<!choco.ir.named_type<"int">>]
+
+    // Note: this is just an empty list
+    %4 : !choco.ir.list_type<!choco.ir.named_type<"int">> = choco.ir.list_expr() 
+    choco.ir.store(%3 : !choco.ir.memloc<!choco.ir.list_type<!choco.ir.named_type<"int">>>, %4 : !choco.ir.list_type<!choco.ir.named_type<"int">>)
+
+    %5 : !choco.ir.memloc<!choco.ir.named_type<"int">> = choco.ir.alloc() ["type" = !choco.ir.named_type<"int">]
+    %6 : !choco.ir.named_type<"int"> = choco.ir.load(%5 : !choco.ir.memloc<!choco.ir.named_type<"int">>)
+
+    %7 : !choco.ir.list_type<!choco.ir.named_type<"int">> = choco.ir.load(%3 : !choco.ir.memloc<!choco.ir.list_type<!choco.ir.named_type<"int">>>)
+
+    %8 : !choco.ir.memloc<!choco.ir.named_type<"int">> = choco.ir.get_address(%7 : !choco.ir.list_type<!choco.ir.named_type<"int">>, %6 : !choco.ir.named_type<"int">) 
+
+    choco.ir.store(%8 : !choco.ir.memloc<!choco.ir.named_type<"int">>, %6 : !choco.ir.named_type<"int">) 
+}
+
+// CHECK: module() {
+// CHECK-NEXT:   %0 : !choco.ir.memloc<!choco.ir.named_type<"int">> = choco.ir.alloc() ["type" = !choco.ir.named_type<"int">]
+// CHECK-NEXT:   %1 : !choco.ir.named_type<"int"> = choco.ir.literal() ["value" = !int<0>]
+// CHECK-NEXT:   choco.ir.store(%0 : !choco.ir.memloc<!choco.ir.named_type<"int">>, %1 : !choco.ir.named_type<"int">)
+// CHECK-NEXT:   %2 : !choco.ir.named_type<"int"> = choco.ir.load(%0 : !choco.ir.memloc<!choco.ir.named_type<"int">>)
+// CHECK-NEXT:   %3 : !choco.ir.memloc<!choco.ir.list_type<!choco.ir.named_type<"int">>> = choco.ir.alloc() ["type" = !choco.ir.list_type<!choco.ir.named_type<"int">>]
+// CHECK-NEXT:   %4 : !choco.ir.list_type<!choco.ir.named_type<"int">> = choco.ir.list_expr()
+// CHECK-NEXT:   choco.ir.store(%3 : !choco.ir.memloc<!choco.ir.list_type<!choco.ir.named_type<"int">>>, %4 : !choco.ir.list_type<!choco.ir.named_type<"int">>)
+// CHECK-NEXT:   %5 : !choco.ir.memloc<!choco.ir.named_type<"int">> = choco.ir.alloc() ["type" = !choco.ir.named_type<"int">]
+// CHECK-NEXT:   %6 : !choco.ir.named_type<"int"> = choco.ir.load(%5 : !choco.ir.memloc<!choco.ir.named_type<"int">>)
+// CHECK-NEXT:   %7 : !choco.ir.list_type<!choco.ir.named_type<"int">> = choco.ir.load(%3 : !choco.ir.memloc<!choco.ir.list_type<!choco.ir.named_type<"int">>>)
+// CHECK-NEXT:   %8 : !choco.ir.memloc<!choco.ir.named_type<"int">> = choco.ir.get_address(%7 : !choco.ir.list_type<!choco.ir.named_type<"int">>, %6 : !choco.ir.named_type<"int">)
+// CHECK-NEXT:   choco.ir.store(%8 : !choco.ir.memloc<!choco.ir.named_type<"int">>, %6 : !choco.ir.named_type<"int">)
+// CHECK-NEXT: }

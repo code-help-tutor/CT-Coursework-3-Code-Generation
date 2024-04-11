@@ -1,0 +1,16 @@
+// RUN: choco-opt -p "choco-ast-to-choco-flat" %s | filecheck %s
+
+builtin.module() {
+  choco.ast.program() {} {
+    choco.ast.call_expr() ["func" = "print"] {
+      choco.ast.literal() ["value" = 1 : !i32]
+    }
+  }
+}
+
+// CHECK:      module() {
+// CHECK-NEXT:   choco.ir.func_def() ["func_name" = "_main", "return_type" = !choco.ir.named_type<"<None>">] {
+// CHECK-NEXT:     %0 : !choco.ir.named_type<"int"> = choco.ir.literal() ["value" = 1 : !i32]
+// CHECK-NEXT:     choco.ir.call_expr(%0 : !choco.ir.named_type<"int">) ["func_name" = "print"]
+// CHECK-NEXT:   }
+// CHECK-NEXT: }

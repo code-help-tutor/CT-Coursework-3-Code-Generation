@@ -1,0 +1,87 @@
+// RUN: choco-opt -p "choco-ast-to-choco-flat" %s | filecheck %s
+
+builtin.module() {
+  choco.ast.program() {
+    choco.ast.var_def() {
+      choco.ast.typed_var() ["var_name" = "digits"] {
+        choco.ast.list_type() {
+          choco.ast.type_name() ["type_name" = "str"]
+        }
+      }
+    } {
+      choco.ast.literal() ["value" = !choco.ast.none, "type" = !choco.ir.named_type<"<None>">]
+    }
+    choco.ast.var_def() {
+      choco.ast.typed_var() ["var_name" = "result"] {
+        choco.ast.type_name() ["type_name" = "str"]
+      }
+    } {
+      choco.ast.literal() ["value" = "", "type" = !choco.ir.named_type<"str">]
+    }
+  } {
+    choco.ast.assign() {
+      choco.ast.id_expr() ["id" = "digits"]
+    } {
+      choco.ast.list_expr() ["type" = !choco.ir.list_type<!choco.ir.named_type<"str">>] {
+        choco.ast.literal() ["value" = "0", "type" = !choco.ir.named_type<"str">]
+        choco.ast.literal() ["value" = "1", "type" = !choco.ir.named_type<"str">]
+        choco.ast.literal() ["value" = "2", "type" = !choco.ir.named_type<"str">]
+        choco.ast.literal() ["value" = "3", "type" = !choco.ir.named_type<"str">]
+        choco.ast.literal() ["value" = "4", "type" = !choco.ir.named_type<"str">]
+        choco.ast.literal() ["value" = "5", "type" = !choco.ir.named_type<"str">]
+        choco.ast.literal() ["value" = "6", "type" = !choco.ir.named_type<"str">]
+        choco.ast.literal() ["value" = "7", "type" = !choco.ir.named_type<"str">]
+        choco.ast.literal() ["value" = "8", "type" = !choco.ir.named_type<"str">]
+        choco.ast.literal() ["value" = "9", "type" = !choco.ir.named_type<"str">]
+      }
+    }
+    choco.ast.assign() {
+      choco.ast.id_expr() ["id" = "result"]
+    } {
+      choco.ast.binary_expr() ["op" = "+", "type" = !choco.ir.named_type<"str">] {
+        choco.ast.id_expr() ["id" = "result", "type" = !choco.ir.named_type<"str">]
+      } {
+        choco.ast.index_expr() ["type" = !choco.ir.named_type<"str">] {
+          choco.ast.id_expr() ["id" = "digits", "type" = !choco.ir.list_type<!choco.ir.named_type<"str">>]
+        } {
+          choco.ast.literal() ["value" = 0 : !i32, "type" = !choco.ir.named_type<"int">]
+        }
+      }
+    }
+    choco.ast.call_expr() ["func" = "print", "type" = !choco.ir.named_type<"<None>">] {
+      choco.ast.id_expr() ["id" = "result", "type" = !choco.ir.named_type<"str">]
+    }
+  }
+}
+
+// CHECK:      module() {
+// CHECK-NEXT:   choco.ir.func_def() ["func_name" = "_main", "return_type" = !choco.ir.named_type<"<None>">] {
+// CHECK-NEXT:     %0 : !choco.ir.named_type<"<None>"> = choco.ir.literal() ["value" = !choco.ir.none]
+// CHECK-NEXT:     %1 : !choco.ir.memloc<!choco.ir.list_type<!choco.ir.named_type<"str">>> = choco.ir.alloc() ["type" = !choco.ir.list_type<!choco.ir.named_type<"str">>]
+// CHECK-NEXT:     choco.ir.store(%1 : !choco.ir.memloc<!choco.ir.list_type<!choco.ir.named_type<"str">>>, %0 : !choco.ir.named_type<"<None>">)
+// CHECK-NEXT:     %2 : !choco.ir.named_type<"str"> = choco.ir.literal() ["value" = ""]
+// CHECK-NEXT:     %3 : !choco.ir.memloc<!choco.ir.named_type<"str">> = choco.ir.alloc() ["type" = !choco.ir.named_type<"str">]
+// CHECK-NEXT:     choco.ir.store(%3 : !choco.ir.memloc<!choco.ir.named_type<"str">>, %2 : !choco.ir.named_type<"str">)
+// CHECK-NEXT:     %4 : !choco.ir.named_type<"str"> = choco.ir.literal() ["value" = "0"]
+// CHECK-NEXT:     %5 : !choco.ir.named_type<"str"> = choco.ir.literal() ["value" = "1"]
+// CHECK-NEXT:     %6 : !choco.ir.named_type<"str"> = choco.ir.literal() ["value" = "2"]
+// CHECK-NEXT:     %7 : !choco.ir.named_type<"str"> = choco.ir.literal() ["value" = "3"]
+// CHECK-NEXT:     %8 : !choco.ir.named_type<"str"> = choco.ir.literal() ["value" = "4"]
+// CHECK-NEXT:     %9 : !choco.ir.named_type<"str"> = choco.ir.literal() ["value" = "5"]
+// CHECK-NEXT:     %10 : !choco.ir.named_type<"str"> = choco.ir.literal() ["value" = "6"]
+// CHECK-NEXT:     %11 : !choco.ir.named_type<"str"> = choco.ir.literal() ["value" = "7"]
+// CHECK-NEXT:     %12 : !choco.ir.named_type<"str"> = choco.ir.literal() ["value" = "8"]
+// CHECK-NEXT:     %13 : !choco.ir.named_type<"str"> = choco.ir.literal() ["value" = "9"]
+// CHECK-NEXT:     %14 : !choco.ir.list_type<!choco.ir.named_type<"str">> = choco.ir.list_expr(%4 : !choco.ir.named_type<"str">, %5 : !choco.ir.named_type<"str">, %6 : !choco.ir.named_type<"str">, %7 : !choco.ir.named_type<"str">, %8 : !choco.ir.named_type<"str">, %9 : !choco.ir.named_type<"str">, %10 : !choco.ir.named_type<"str">, %11 : !choco.ir.named_type<"str">, %12 : !choco.ir.named_type<"str">, %13 : !choco.ir.named_type<"str">)
+// CHECK-NEXT:     choco.ir.store(%1 : !choco.ir.memloc<!choco.ir.list_type<!choco.ir.named_type<"str">>>, %14 : !choco.ir.list_type<!choco.ir.named_type<"str">>)
+// CHECK-NEXT:     %15 : !choco.ir.named_type<"str"> = choco.ir.load(%3 : !choco.ir.memloc<!choco.ir.named_type<"str">>)
+// CHECK-NEXT:     %16 : !choco.ir.list_type<!choco.ir.named_type<"str">> = choco.ir.load(%1 : !choco.ir.memloc<!choco.ir.list_type<!choco.ir.named_type<"str">>>)
+// CHECK-NEXT:     %17 : !choco.ir.named_type<"int"> = choco.ir.literal() ["value" = 0 : !i32]
+// CHECK-NEXT:     %18 : !choco.ir.memloc<!choco.ir.named_type<"str">> = choco.ir.get_address(%16 : !choco.ir.list_type<!choco.ir.named_type<"str">>, %17 : !choco.ir.named_type<"int">)
+// CHECK-NEXT:     %19 : !choco.ir.named_type<"str"> = choco.ir.load(%18 : !choco.ir.memloc<!choco.ir.named_type<"str">>)
+// CHECK-NEXT:     %20 : !choco.ir.named_type<"str"> = choco.ir.binary_expr(%15 : !choco.ir.named_type<"str">, %19 : !choco.ir.named_type<"str">) ["op" = "+"]
+// CHECK-NEXT:     choco.ir.store(%3 : !choco.ir.memloc<!choco.ir.named_type<"str">>, %20 : !choco.ir.named_type<"str">)
+// CHECK-NEXT:     %21 : !choco.ir.named_type<"str"> = choco.ir.load(%3 : !choco.ir.memloc<!choco.ir.named_type<"str">>)
+// CHECK-NEXT:     choco.ir.call_expr(%21 : !choco.ir.named_type<"str">) ["func_name" = "print"]
+// CHECK-NEXT:   }
+// CHECK-NEXT: }

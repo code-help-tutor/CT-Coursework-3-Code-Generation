@@ -1,0 +1,8 @@
+# RUN: choco-opt %s | filecheck %s
+
+def foo(a : int b : int):
+    pass
+
+# CHECK:      SyntaxError (line 3, column 17): expression found, but comma expected.
+# CHECK-NEXT: >>>def foo(a : int b : int):
+# CHECK-NEXT: >>>----------------^

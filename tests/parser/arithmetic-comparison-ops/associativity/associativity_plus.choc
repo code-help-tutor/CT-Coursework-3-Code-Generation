@@ -1,0 +1,17 @@
+# RUN: choco-opt %s | filecheck %s
+
+0 + 1 + 2
+
+# CHECK:      builtin.module() {
+# CHECK-NEXT:   choco.ast.program() {} {
+# CHECK-NEXT:     choco.ast.binary_expr() ["op" = "+"] {
+# CHECK-NEXT:       choco.ast.binary_expr() ["op" = "+"] {
+# CHECK-NEXT:         choco.ast.literal() ["value" = 0 : !i32]
+# CHECK-NEXT:       } {
+# CHECK-NEXT:         choco.ast.literal() ["value" = 1 : !i32]
+# CHECK-NEXT:       }
+# CHECK-NEXT:     } {
+# CHECK-NEXT:       choco.ast.literal() ["value" = 2 : !i32]
+# CHECK-NEXT:     }
+# CHECK-NEXT:   }
+# CHECK-NEXT: }
